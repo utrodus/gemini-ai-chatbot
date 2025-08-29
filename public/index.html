@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gemini AI Chatbot</title>
+        <link rel="stylesheet" href="style.css" />
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div id="chat-box" class="chat-box">
+                <div id="empty-state" class="empty-state">
+                    <div class="empty-state-icon">
+                        <svg
+                            width="80"
+                            height="80"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M12 22L12 13"
+                                stroke="#0D6EFD"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M19 9C19 5.13401 15.866 2 12 2C8.13401 2 5 5.13401 5 9C5 10.5395 5.46049 11.9776 6.24496 13.1908C6.73221 13.9112 7 14.7663 7 15.6286V15.6286C7 16.1383 7.21208 16.6234 7.59789 16.9757L10.8 19.8"
+                                stroke="#0D6EFD"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M15 9L9 9"
+                                stroke="#0D6EFD"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M9 6L15 6"
+                                stroke="#0D6EFD"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="M15 16L17 18L21 14"
+                                stroke="#0D6EFD"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                    </div>
+                    <h3>Welcome to Gemini AI Chat!</h3>
+                    <p>
+                        Type a message below to start a conversation with the
+                        AI.
+                    </p>
+                    <div class="suggestion-chips">
+                        <button
+                            class="suggestion-chip"
+                            data-message="Tell me a short story"
+                            style="--index: 0"
+                        >
+                            Tell me a short story
+                        </button>
+                        <button
+                            class="suggestion-chip"
+                            data-message="Explain quantum computing"
+                            style="--index: 1"
+                        >
+                            Explain quantum computing
+                        </button>
+                        <button
+                            class="suggestion-chip"
+                            data-message="Write a simple JavaScript function"
+                            style="--index: 2"
+                        >
+                            Write a JavaScript function
+                        </button>
+                        <button
+                            class="suggestion-chip"
+                            data-message="Give me a recipe idea"
+                            style="--index: 3"
+                        >
+                            Give me a recipe idea
+                        </button>
+                    </div>
+                    <div class="arrow-down">
+                        <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M12 5V19M12 19L19 12M12 19L5 12"
+                                stroke="#0D6EFD"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                    </div>
+                    <div class="powered-by">
+                        Powered by <span>Gemini AI</span>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-header">
+                <div class="chat-controls">
+                    <button
+                        id="clear-chat"
+                        class="control-button clear-button"
+                        title="Clear messages but keep the chat active"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            viewBox="0 0 16 16"
+                        >
+                            <path
+                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+                            />
+                            <path
+                                fill-rule="evenodd"
+                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                            />
+                        </svg>
+                        Clear Messages
+                    </button>
+                    <button
+                        id="reset-chat"
+                        class="control-button reset-button"
+                        title="Reset conversation and show welcome screen"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            viewBox="0 0 16 16"
+                        >
+                            <path
+                                d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"
+                            />
+                            <path
+                                fill-rule="evenodd"
+                                d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"
+                            />
+                        </svg>
+                        New Chat
+                    </button>
+                </div>
+            </div>
+            <div class="typing-indicator" id="typing-indicator">
+                <div class="typing-indicator-container">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <!-- Custom Dialog -->
+            <div id="custom-dialog" class="custom-dialog">
+                <div class="dialog-content">
+                    <div class="dialog-header">
+                        <h3 id="dialog-title">Confirmation</h3>
+                        <button id="dialog-close" class="dialog-close-btn">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                viewBox="0 0 16 16"
+                            >
+                                <path
+                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="dialog-body">
+                        <p id="dialog-message">
+                            Are you sure you want to proceed?
+                        </p>
+                    </div>
+                    <div class="dialog-footer">
+                        <button
+                            id="dialog-cancel"
+                            class="dialog-btn dialog-cancel"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                viewBox="0 0 16 16"
+                            >
+                                <path
+                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+                                />
+                            </svg>
+                            Cancel
+                        </button>
+                        <button
+                            id="dialog-confirm"
+                            class="dialog-btn dialog-confirm"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                viewBox="0 0 16 16"
+                            >
+                                <path
+                                    d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
+                                />
+                            </svg>
+                            Confirm
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <form id="chat-form">
+                <input
+                    type="text"
+                    id="user-input"
+                    placeholder="Type your message..."
+                    autocomplete="off"
+                    required
+                />
+                <button type="submit">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        viewBox="0 0 16 16"
+                    >
+                        <path
+                            d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"
+                        />
+                    </svg>
+                    <span>Send</span>
+                </button>
+            </form>
+        </div>
+        <script>
+            // Initialize highlight.js
+            document.addEventListener("DOMContentLoaded", () => {
+                hljs.configure({
+                    languages: [
+                        "javascript",
+                        "python",
+                        "java",
+                        "c",
+                        "cpp",
+                        "csharp",
+                        "html",
+                        "css",
+                        "json",
+                        "bash",
+                        "markdown",
+                    ],
+                });
+
+                // Add click event listeners to suggestion chips
+                document
+                    .querySelectorAll(".suggestion-chip")
+                    .forEach((chip) => {
+                        chip.addEventListener("click", function () {
+                            const message = this.getAttribute("data-message");
+                            document.getElementById("user-input").value =
+                                message;
+                            document
+                                .getElementById("chat-form")
+                                .dispatchEvent(new Event("submit"));
+                        });
+                    });
+
+                // Chat control functions are in controls.js
+            });
+        </script>
+        <script src="script.js"></script>
+        <script src="controls.js"></script>
+    </body>
+</html>
