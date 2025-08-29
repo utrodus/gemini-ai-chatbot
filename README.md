@@ -4,6 +4,10 @@ A modern, responsive web-based chatbot powered by Google Gemini AI, built with N
 
 ---
 
+**This repository is the final submission for the ["AI untuk Developer: Maju Bareng AI Bersama Hacktiv8"](https://www.hacktiv8.com/projects/avpn-asia) program.**
+
+---
+
 ## Features
 
 - **Conversational AI**: Uses Google Gemini API for natural language chat.
@@ -38,8 +42,8 @@ gemini-chatbot-api/
 ### 1. Clone & Install
 
 ```bash
-git clone <your-repo-url>
-cd gemini-chatbot-api
+git clone https://github.com/utrodus/gemini-ai-chatbot.git
+cd gemini-ai-chatbot
 npm install
 ```
 
@@ -152,4 +156,4 @@ This project is licensed under the ISC License.
 
 ## Author
 
-Built by [Your Name] — 2024
+Built by Utrodus Said Al Baqi — 2025
