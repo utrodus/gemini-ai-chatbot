@@ -139,9 +139,6 @@ The server will start at `http://localhost:3000`.
 
 ---
 
-## License
-
-This project is licensed under the ISC License.
 
 ---
 
